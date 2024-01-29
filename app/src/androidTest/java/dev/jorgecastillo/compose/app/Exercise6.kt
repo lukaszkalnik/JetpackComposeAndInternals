@@ -38,7 +38,19 @@ import dev.jorgecastillo.compose.app.ui.theme.ComposeAndInternalsTheme
  */
 fun Modifier.circledRainbowBorder(strokeWidth: Float): Modifier =
     drawWithContent {
+        drawCircle(
+            color = Color.Yellow,
+            radius = size.width / 2 - strokeWidth,
+        )
 
+        drawContent()
+
+        val brush = Brush.linearGradient(listOf(Color.Magenta, Color.Cyan))
+        drawCircle(
+            brush = brush,
+            radius = size.width / 2 - strokeWidth,
+            style = Stroke(strokeWidth)
+        )
     }
 
 @Preview
@@ -46,7 +58,11 @@ fun Modifier.circledRainbowBorder(strokeWidth: Float): Modifier =
 private fun CircledRainbowBorderPreview() {
     ComposeAndInternalsTheme {
         Box(Modifier.padding(16.dp)) {
-            Box(Modifier.circledRainbowBorder(12f).padding(36.dp)) {
+            Box(
+                Modifier
+                    .circledRainbowBorder(12f)
+                    .padding(36.dp)
+            ) {
                 Text("Hey")
             }
         }
