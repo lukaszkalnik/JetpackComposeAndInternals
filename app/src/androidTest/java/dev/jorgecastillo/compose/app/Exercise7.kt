@@ -45,8 +45,7 @@ import androidx.compose.ui.unit.dp
 import dev.jorgecastillo.compose.app.data.FakeSpeakerRepository
 import dev.jorgecastillo.compose.app.models.Speaker
 import dev.jorgecastillo.compose.app.ui.theme.ComposeAndInternalsTheme
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 
 /**
  * ### Exercise 7 👩🏾‍💻
@@ -168,7 +167,27 @@ private fun AdaptativeScreen() {
     val speaker = speakers.first()
     val friends = speakers.drop(1)
 
-    // Add your code here
+    BoxWithConstraints {
+        if (maxWidth >= 600.dp) {
+            Row {
+                ProfileScreen(
+                    speaker = speaker,
+                    modifier = Modifier
+                        .width(320.dp)
+                        .fillMaxHeight()
+                )
+                FriendsScreen(
+                    speakers = friends,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        } else {
+            ProfileScreen(
+                speaker = speaker,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
 }
 
 @Composable
