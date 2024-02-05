@@ -6,7 +6,6 @@ package dev.jorgecastillo.compose.app
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
-import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,11 +25,9 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import dev.jorgecastillo.compose.app.ui.theme.ComposeAndInternalsTheme
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.MatcherAssert.assertThat
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.hamcrest.CoreMatchers.*
+import org.hamcrest.MatcherAssert.*
+import org.junit.*
 
 /**
  * ### Exercise 8 👩🏾‍💻
@@ -99,7 +96,7 @@ class Exercise8 {
                         SideEffect { firstRecompositionCounter.increment() }
 
                         MyRow {
-                            Text("Text is [read the CompositionLocal value here]")
+                            Text("Text is ${localTest1.current}")
                         }
                     }
 
@@ -118,7 +115,7 @@ class Exercise8 {
         composeTestRule.onNodeWithTag("button").performClick()
         composeTestRule.runOnIdle {
             assertThat(firstRecompositionCounter.count(), `is`(1))
-            assertThat(secondRecompositionCounter.count(), `is`(1))
+            assertThat(secondRecompositionCounter.count(), `is`(4))
         }
     }
 
@@ -133,7 +130,7 @@ class Exercise8 {
                         SideEffect { firstRecompositionCounter.increment() }
 
                         MyRow {
-                            Text("Text is [read the CompositionLocal value here]")
+                            Text("Text is ${localTest2.current}")
                         }
                     }
 
@@ -157,8 +154,8 @@ class Exercise8 {
     }
 }
 
-private val localTest1: ProvidableCompositionLocal<Int> = TODO()
-private val localTest2: ProvidableCompositionLocal<Int> = TODO()
+private val localTest1: ProvidableCompositionLocal<Int> = compositionLocalOf { 0 }
+private val localTest2: ProvidableCompositionLocal<Int> = staticCompositionLocalOf { 0 }
 
 val firstRecompositionCounter = RecompositionCounter()
 val secondRecompositionCounter = RecompositionCounter()
