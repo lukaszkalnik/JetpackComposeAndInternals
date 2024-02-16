@@ -7,6 +7,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import dev.jorgecastillo.compose.app.ui.theme.Pink200
+import dev.jorgecastillo.compose.app.ui.theme.Pink500
+import dev.jorgecastillo.compose.app.ui.theme.Pink700
 import dev.jorgecastillo.compose.app.ui.theme.Shapes
 import dev.jorgecastillo.compose.app.ui.theme.Typography
 
@@ -38,5 +41,32 @@ fun MyAppTheme(
         typography = Typography,
         shapes = Shapes,
         content = content
+    )
+}
+
+private val DarkPinkColors = darkColors(
+    primary = Pink200,
+    primaryVariant = Pink700,
+    secondary = Teal200,
+    surface = Pink200
+)
+
+private val LightPinkColors = lightColors(
+    primary = Pink500,
+    primaryVariant = Pink700,
+    secondary = Teal200,
+    surface = Pink700
+)
+
+@Composable
+fun PinkTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colors = if (darkTheme) DarkPinkColors else LightPinkColors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content,
     )
 }
