@@ -4,7 +4,6 @@ package dev.jorgecastillo.compose.app.ui.composables
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -76,13 +75,10 @@ fun SpeakersScreen(speakers: List<Speaker>) {
 @Composable
 fun SpeakerCard(speaker: Speaker, onClick: (Speaker) -> Unit = {}) {
     Card(
+        onClick = { onClick(speaker) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(dimensionResource(id = dimen.spacing_small))
-            .clickable(
-                enabled = true,
-                onClick = { onClick(speaker) }
-            )
+            .padding(dimensionResource(id = dimen.spacing_small)),
     ) {
         with(speaker) {
             Row(
