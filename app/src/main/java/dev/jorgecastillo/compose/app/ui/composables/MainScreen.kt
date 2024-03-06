@@ -21,12 +21,15 @@ fun MainScreen() {
 
         val speakersRoute = "speakers"
 
-        NavHost(navController = navController, startDestination = speakersRoute) {
+        NavHost(
+            modifier = Modifier.padding(paddingValues),
+            navController = navController,
+            startDestination = speakersRoute
+        ) {
             val speakerRoute = "speaker"
 
             composable(speakersRoute) {
                 SpeakerFeed(
-                    modifier = Modifier.padding(paddingValues),
                     onSpeakerClick = { speaker ->
                         navController.navigate("$speakerRoute/${speaker.id}")
                     }
