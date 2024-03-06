@@ -4,6 +4,7 @@ package dev.jorgecastillo.compose.app.ui.composables
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -52,7 +53,10 @@ fun SpeakersScreen(speakers: List<Speaker>) {
         },
         floatingActionButton = {
             FloatingActionButton(onClick = { /*TODO*/ }) {
-                Icon(painter = rememberVectorPainter(image = Icons.Default.Add), contentDescription = null)
+                Icon(
+                    painter = rememberVectorPainter(image = Icons.Default.Add),
+                    contentDescription = null
+                )
             }
         }
     ) { paddingValues ->
@@ -75,6 +79,10 @@ fun SpeakerCard(speaker: Speaker, onClick: (Speaker) -> Unit = {}) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(id = dimen.spacing_small))
+            .clickable(
+                enabled = true,
+                onClick = { onClick(speaker) }
+            )
     ) {
         with(speaker) {
             Row(
